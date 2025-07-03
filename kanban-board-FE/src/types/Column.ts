@@ -1,7 +1,7 @@
-import type { TaskType } from '../types/Task';
+import type { TaskType } from '../types/Task'
 
 export interface ColumnType {
-    id: number;
-    title: string;
-    tasks: TaskType[];
+  id: number
+  title: string
+  tasks: TaskType[]
 }

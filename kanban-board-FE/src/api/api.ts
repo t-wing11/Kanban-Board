@@ -1,10 +1,10 @@
-import axios from 'axios';
-import type { TaskType } from '../types/Task';
-import { h } from 'vue';
+import axios from 'axios'
+import type { TaskType } from '../types/Task'
+import { h } from 'vue'
 
 const api = axios.create({
-  baseURL: 'http://localhost:5000/'
-});
+  baseURL: 'http://localhost:5000/',
+})
 
 // export const getTasks = () => axios.get(API_BASE);
 // export const createTask = (task: TaskType) => axios.post(API_BASE, task);
