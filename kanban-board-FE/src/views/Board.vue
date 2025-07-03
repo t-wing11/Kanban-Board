@@ -13,84 +13,114 @@
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue';
+  import { ref, onMounted } from 'vue';
   import { ColumnType } from '../types/Column';
   import type { TaskType } from '../types/Task';
   import Column from './Column.vue';
+  import api from '../api/api';
 
-  const columns = ref<ColumnType[]>([
-    {
-      id: 1,
-      title: 'To Do',
-      tasks: []
-    },
-    {
-      id: 2,
-      title: 'In Progress',
-      tasks: []
-    },
-    {
-      id: 3,
-      title: 'Done',
-      tasks: []
+  const columns = ref<ColumnType[]>([]);
+
+  onMounted(async () => {
+    try {
+      const response = await api.get('/kanban_board');
+      columns.value = response.data;
+    } catch (error) {
+      console.error('Error fetching tasks:', error);
     }
-  ]);
+  });
 
-  function editTask(payload: { taskId: number; newTitle: string; newDescription: string }) {
-    // Find the column that contains the task
-    const column = columns.value.find(c => c.tasks.some(t => t.id === payload.taskId));
-    // Update the tasks contents
-    if (column) {
-      // Update the task title and description
-      const task = column.tasks.find(t => t.id === payload.taskId);
-      if (task) {
-        task.title = payload.newTitle;
-        task.description = payload.newDescription;
-        console.log('Updated task:', task);
+  async function editTask(payload: { taskId: number; newTitle: string; newDescription: string, status: number }) {
+    try {
+      const response = await api.put(`/kanban_board/${payload.taskId}`, {
+        title: payload.newTitle,
+        description: payload.newDescription,
+        status: Number(payload.status)
+      });
+      const updatedTask = response.data;
+      const column = columns.value.find(c => c.id === Number(payload.status));
+      if (column) {
+        const task = column.tasks.find(t => t.id === payload.taskId);
+        if (task) {
+          task.title = updatedTask.title;
+          task.description = updatedTask.description;
+          console.log('Updated task:', task);
+        } else {
+          console.error('Task not found in column:', payload.taskId);
+        }
+      } else {
+        console.error('Column not found for task status:', Number(payload.status));
       }
+    } catch (error) {
+      console.error('Error updating task:', error);
     }
-
   }
 
-  function deleteTask(taskId: number) {
-    columns.value.forEach(c => {
-      c.tasks = c.tasks.filter(t => t.id !== taskId);
-    });
-    console.log('Deleted task with ID:', taskId);
+  async function deleteTask(taskId: number) {
+    try {
+      await api.delete(`/kanban_board/${taskId}`);
+      // Find the column that contains the task
+      const column = columns.value.find(c => c.tasks.some(t => t.id === taskId));
+      if (column) {
+        // Remove the task from the column
+        column.tasks = column.tasks.filter(t => t.id !== taskId);
+        console.log('Deleted task with ID:', taskId);
+      }
+    } catch (error) {
+      console.error('Error deleting task:', error);
+    }
   }
 
-  function moveTask(payload: { task: TaskType; fromColumn: number; toColumn: number }) {
-      const { task, fromColumn } = payload;
-      const toColumn = Number(payload.toColumn);
+  async function moveTask(payload: { task: TaskType; fromColumn: number; toColumn: number }) {
+      try {
+        const { task, fromColumn } = payload;
+        const toColumn = Number(payload.toColumn);
+        if (fromColumn === toColumn) {
+            return;
+        }
 
-      if (fromColumn === toColumn) {
-          return;
-      }
+        await api.put(`/kanban_board/${task.id}`, {
+          title: task.title,               
+          description: task.description,   
+          status: toColumn                 
+        });
 
-      // Remove task from the source column
-      const sourceColumn = columns.value.find(c => c.id === fromColumn);
-      const targetColumn = columns.value.find(c => c.id === toColumn);
+        const sourceColumn = columns.value.find(c => c.id === fromColumn);
+        const targetColumn = columns.value.find(c => c.id === toColumn);
 
-      //remove task from source column
-      if (sourceColumn) {
-          sourceColumn.tasks = sourceColumn.tasks.filter(t => t.id !== task.id);
-      }
+          //remove task from source column
+        if (sourceColumn) {
+            sourceColumn.tasks = sourceColumn.tasks.filter(t => t.id !== task.id);
+        }
 
-      // Update task status
-      task.status = toColumn;
+        // Update task status
+        task.status = toColumn;
 
-      // Add task to the target column
-      if (targetColumn) {
-          targetColumn.tasks.push(task);
+        // Add task to the target column
+        if (targetColumn) {
+            targetColumn.tasks.push(task);
+        }
+
+        console.log('Moved task:', task.id, 'from column', fromColumn, 'to column', toColumn);
+      } catch (error) {
+        console.error('Error moving task:', error);
       }
   }
 
-  function addTask(task: TaskType) {
+  async function addTask(task: TaskType) {  
+    try {
+      const response = await api.post('/kanban_board', task);
+      const newTask = response.data;
+      // Find the column to which the task should be added
       const column = columns.value.find(c => c.id === Number(task.status));
       if (column) {
-          column.tasks.push(task);
+        column.tasks.push(newTask);
+        console.log('Added task:', newTask, 'to column ID:', Number(task.status));
+      } else {
+        console.error('Column not found for task status:', Number(task.status));
       }
-      console.log('Added task:', task, 'to column ID:', task.status);
-  }
-
+    } catch (error) {
+      console.error('Error adding task:', error);
+    }
+  } 
 </script>

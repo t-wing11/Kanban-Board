@@ -32,7 +32,7 @@
 
     const emit = defineEmits<{
         (e: 'save-task', task: TaskType): void;
-        (e: 'edit-task', payload: { taskId: number; newTitle: string; newDescription: string }): void;
+        (e: 'edit-task', payload: { taskId: number; newTitle: string; newDescription: string, status: number }): void;
         (e: 'cancel'): void;
     }>();
 
@@ -48,7 +48,8 @@
             emit('edit-task', {
                 taskId: task.value.id,
                 newTitle: task.value.title,
-                newDescription: task.value.description
+                newDescription: task.value.description,
+                status: task.value.status
             });
         } else {
             emit('save-task', task.value);

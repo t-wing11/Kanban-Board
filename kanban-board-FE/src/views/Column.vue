@@ -28,7 +28,7 @@
     }>();
 
     const emit = defineEmits<{
-        (e: 'edit-task', payload: { taskId: number, newTitle: string, newDescription: string }): void;
+        (e: 'edit-task', payload: { taskId: number, newTitle: string, newDescription: string, status: number }): void;
         (e: 'delete-task', taskId: number): void;
         (e: 'move-task', payload: { task: TaskType; fromColumn: number; toColumn: number }): void;
         (e: 'add-task', task: TaskType ): void;
@@ -36,11 +36,12 @@
 
     const taskFormVisible = ref(false);
 
-    function editTask(payload: { taskId: number; newTitle: string; newDescription: string }) {
+    function editTask(payload: { taskId: number; newTitle: string; newDescription: string, status: number }) {
         emit('edit-task', {
             taskId: payload.taskId,
             newTitle: payload.newTitle,
-            newDescription: payload.newDescription
+            newDescription: payload.newDescription,
+            status: payload.status
         });
     }
 
