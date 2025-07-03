@@ -5,35 +5,43 @@
         <div class="tasks">
             <Task v-for="task in column.tasks" :key="task.id" :task="task" @edit-task="editTask" @delete-task="deleteTask" @move-task="moveTask" />
         </div>
-        <button class="btn btn-primary" @click="taskFormVisible = true">Add Task</button>
-        <TaskForm v-if="taskFormVisible" @save-task="handleSaveTask" @cancel="taskFormVisible = false" />
+        <button class="btn btn-success" @click="taskFormVisible = true">Add Task</button>
+        <TaskForm v-if="taskFormVisible" 
+            :task="{ id: 0, title: '', description: '', status: column.id }"
+            :isEdit="false"
+            @save-task="addTask" 
+            @edit-task="editTask"
+            @cancel="taskFormVisible = false"
+        />
     </div>
-
 </template>
 
 <script setup lang="ts">
-    import Task from './Task.vue';
-    import { defineProps, defineEmits } from 'vue';
+    import { defineProps, defineEmits, ref } from 'vue';
     import { ColumnType } from '../types/Column';
     import type { TaskType } from '../types/Task';
+    import Task from './Task.vue';
     import TaskForm from './CreateTask.vue';
-    import { ref } from 'vue';
 
     const props = defineProps<{
         column: ColumnType;
     }>();
 
     const emit = defineEmits<{
-        (e: 'edit-task', task: TaskType): void;
+        (e: 'edit-task', payload: { taskId: number, newTitle: string, newDescription: string }): void;
         (e: 'delete-task', taskId: number): void;
         (e: 'move-task', payload: { task: TaskType; fromColumn: number; toColumn: number }): void;
-        (e: 'add-task', payload: { columnId: number, task: TaskType }): void;
+        (e: 'add-task', task: TaskType ): void;
     }>();
 
     const taskFormVisible = ref(false);
 
-    function editTask(task: TaskType) {
-        emit('edit-task', task)
+    function editTask(payload: { taskId: number; newTitle: string; newDescription: string }) {
+        emit('edit-task', {
+            taskId: payload.taskId,
+            newTitle: payload.newTitle,
+            newDescription: payload.newDescription
+        });
     }
 
     function deleteTask(task: TaskType) {
@@ -46,9 +54,13 @@
         const task = payload.task;
         emit('move-task', { task, fromColumn, toColumn });
     }
-    
-    function handleSaveTask(newTask: TaskType) {
-        emit('add-task', { columnId: props.column.id, task: newTask })
-        taskFormVisible.value = false
+
+    function addTask(task: TaskType) {
+        const newTask = {
+            ...task,
+            id: Date.now(),
+        };
+        emit('add-task', newTask);
+        taskFormVisible.value = false;
     }
 </script>

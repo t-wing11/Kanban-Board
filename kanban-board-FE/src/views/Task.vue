@@ -11,28 +11,39 @@
         </select>
 
         <div>
-            <button class="btn btn-primary" @click="handleEdit">Edit Task</button>
+            <button class="btn btn-primary" @click="taskFormVisible = true">Edit Task</button>
+            <TaskForm v-if="taskFormVisible" 
+                :task="task"
+                :isEdit="true"
+                @edit-task="handleEdit"
+                @cancel="taskFormVisible = false" />
             <button class="btn btn-danger" @click="handleDelete">Delete Task</button>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
-    import { defineProps } from 'vue';
+    import { defineProps, ref, defineEmits } from 'vue';
     import type { TaskType } from '../types/Task';
+    import TaskForm from './CreateTask.vue';
 
     const props = defineProps<{
         task: TaskType;
     }>();
 
     const emit = defineEmits<{
-        (e: 'edit-task', task: TaskType): void;
+        (e: 'edit-task', payload: { taskId: number, newTitle: string, newDescription: string }): void;
         (e: 'delete-task', task: TaskType): void;
         (e: 'move-task', payload: { task: TaskType; fromColumn: number; toColumn: number }): void;
     }>();
 
-    const handleEdit = () => {
-        emit('edit-task', props.task);
+    const handleEdit = (payload: { taskId: number, newTitle: string, newDescription: string }) => {
+        emit('edit-task', {
+            taskId: payload.taskId,
+            newTitle: payload.newTitle,
+            newDescription: payload.newDescription
+        });
+        taskFormVisible.value = false;
     };
 
     const handleDelete = () => {
@@ -43,4 +54,6 @@
         emit('move-task', { task: props.task, fromColumn: props.task.status, toColumn });
     };
 
+    const taskFormVisible = ref(false);
+    
 </script>
