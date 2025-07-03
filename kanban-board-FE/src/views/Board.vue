@@ -25,6 +25,21 @@ onMounted(async () => {
   try {
     const response = await api.get('/kanban_board')
     columns.value = response.data
+    columns.value.forEach((column) => {
+      let colorClass = ''
+      switch (column.id) {
+        case 1:
+          colorClass = 'column-blue'
+          break
+        case 2:
+          colorClass = 'column-yellow'
+          break
+        case 3:
+          colorClass = 'column-red'
+          break
+      }
+      column.colorClass = colorClass
+    })
   } catch (error) {
     console.error('Error fetching tasks:', error)
   }

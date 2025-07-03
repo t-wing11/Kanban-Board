@@ -4,4 +4,5 @@ export interface ColumnType {
   id: number
   title: string
   tasks: TaskType[]
+  colorClass?: string
 }

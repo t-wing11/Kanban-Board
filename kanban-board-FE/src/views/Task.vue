@@ -1,25 +1,31 @@
 <template>
-  <div class="task">
-    <h3>{{ task.title }}</h3>
-    <p>{{ task.description }}</p>
-
-    <label>Status: {{ task.status }}</label>
+  <div :class="['task', props.colorClass]">
+    <div class="task-header">{{ task.title }}</div>
+    <div class="task-description">{{ task.description }}</div>
+    
+    <div class="status-select-container">
+      <label for="status-select">Status:</label>
     <select v-model="task.status" @change="handleMove(task.status)">
       <option value="1">To Do</option>
       <option value="2">In Progress</option>
       <option value="3">Done</option>
     </select>
+    </div>
 
-    <div>
-      <button class="btn btn-primary" @click="taskFormVisible = true">Edit Task</button>
-      <TaskForm
+    <div class="task-footer">
+      <template v-if="!taskFormVisible">
+        <button class="task-footer-button" @click="taskFormVisible = true">Edit Task</button>
+        <button class="task-footer-button" @click="handleDelete">Delete Task</button>
+      </template>
+      <CreateTask
         v-if="taskFormVisible"
         :task="task"
         :isEdit="true"
+        :colorClass="props.colorClass"
         @edit-task="handleEdit"
         @cancel="taskFormVisible = false"
       />
-      <button class="btn btn-danger" @click="handleDelete">Delete Task</button>
+      
     </div>
   </div>
 </template>
@@ -27,10 +33,11 @@
 <script setup lang="ts">
 import { defineProps, ref, defineEmits } from 'vue'
 import type { TaskType } from '../types/Task'
-import TaskForm from './CreateTask.vue'
+import CreateTask from './CreateTask.vue'
 
 const props = defineProps<{
-  task: TaskType
+  task: TaskType,
+  colorClass?: string
 }>()
 
 const emit = defineEmits<{

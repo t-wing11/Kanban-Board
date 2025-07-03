@@ -1,26 +1,31 @@
 <template>
-  <div class="column">
-    <h2>{{ column.title }}</h2>
+  <div :class="['column', column.colorClass]">
+    <div class="column-header">{{ column.title }}</div>
 
-    <div class="tasks">
+    <div class="column-tasks">
       <Task
         v-for="task in column.tasks"
         :key="task.id"
         :task="task"
+        :colorClass="column.colorClass"
         @edit-task="editTask"
         @delete-task="deleteTask"
         @move-task="moveTask"
       />
     </div>
-    <button class="btn btn-success" @click="taskFormVisible = true">Add Task</button>
-    <TaskForm
+    <div class="column-footer">
+            <button :class="['add-Button', column.colorClass]" v-if="!taskFormVisible" @click="taskFormVisible = true">Add Task <span class="button-icon">➕</span></button>
+
+      <CreateTask
       v-if="taskFormVisible"
       :task="{ id: 0, title: '', description: '', status: column.id }"
       :isEdit="false"
+      :colorClass="column.colorClass"
       @save-task="addTask"
       @edit-task="editTask"
       @cancel="taskFormVisible = false"
     />
+  </div>
   </div>
 </template>
 
@@ -29,7 +34,7 @@ import { defineProps, defineEmits, ref } from 'vue'
 import { ColumnType } from '../types/Column'
 import type { TaskType } from '../types/Task'
 import Task from './Task.vue'
-import TaskForm from './CreateTask.vue'
+import CreateTask from './CreateTask.vue'
 
 const props = defineProps<{
   column: ColumnType
