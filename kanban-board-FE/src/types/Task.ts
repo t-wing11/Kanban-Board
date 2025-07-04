@@ -3,4 +3,6 @@ export interface TaskType {
   title: string
   description: string
   status: number
+  due_date: string | null
+  tags: string[]
 }

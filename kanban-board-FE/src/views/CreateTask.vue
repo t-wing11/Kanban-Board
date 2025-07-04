@@ -24,6 +24,23 @@
               <option value="3">Done</option>
             </select>
           </div>
+          <div class="dueDate">
+            <label for="due_date">Due Date:</label>
+            <input
+              id="due_date"
+              type="date"
+              v-model="task.due_date"
+              class="input"
+            />
+          </div>
+          <div class="tag-select-container">
+            <label for="tags">Tags:</label>
+            <select id="tags" v-model="task.tags" multiple>
+              <option value="urgent">Urgent</option>
+              <option value="important">Important</option>
+              <option value="optional">Optional</option>
+            </select>
+          </div>
           <div class="form-footer">
             <button type="submit">Save Task</button>
             <button type="button" @click="cancel">Cancel</button>
@@ -50,6 +67,8 @@ const task = ref<TaskType>({
   title: props.task?.title || '',
   description: props.task?.description || '',
   status: props.task!.status,
+  due_date: props.task?.due_date || null,
+  tags: props.task?.tags || [],
 })
 
 // Define the emits for the component
@@ -57,7 +76,7 @@ const emit = defineEmits<{
   (e: 'save-task', task: TaskType): void
   (
     e: 'edit-task',
-    payload: { taskId: number; newTitle: string; newDescription: string; status: number },
+    payload: { taskId: number; newTitle: string; newDescription: string; status: number; dueDate: string | null; tags: string[] },
   ): void
   (e: 'cancel'): void
 }>()
@@ -71,6 +90,8 @@ function handleSubmit() {
       newTitle: task.value.title,
       newDescription: task.value.description,
       status: task.value.status,
+      dueDate: task.value.due_date,
+      tags: task.value.tags,
     })
   } else {
     emit('save-task', task.value)

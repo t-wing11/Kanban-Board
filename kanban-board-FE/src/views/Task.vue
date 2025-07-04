@@ -1,6 +1,7 @@
 <template>
   <div :class="['task', `variant--${props.colorClass}`]">
     <div class="task-header">{{ task.title }}</div>
+    <div class="task-tags">{{ task.tags }}</div>
     <div class="task-description">{{ task.description }}</div>
 
     <div class="status-select-container">
@@ -10,6 +11,7 @@
         <option value="2">In Progress</option>
         <option value="3">Done</option>
       </select>
+      <div class="dueDate">Due Date: {{ task.due_date }}</div>
     </div>
 
     <div class="task-footer">
@@ -45,7 +47,7 @@ const taskFormVisible = ref(false)
 const emit = defineEmits<{
   (
     e: 'edit-task',
-    payload: { taskId: number; newTitle: string; newDescription: string; status: number },
+    payload: { taskId: number; newTitle: string; newDescription: string; status: number; dueDate: string | null; tags: string[] },
   ): void
   (e: 'delete-task', task: TaskType): void
   (e: 'move-task', payload: { task: TaskType; fromColumn: number; toColumn: number }): void
@@ -58,12 +60,16 @@ const handleEdit = (payload: {
   newTitle: string
   newDescription: string
   status: number
+  dueDate: string | null
+  tags: string[]
 }) => {
   emit('edit-task', {
     taskId: payload.taskId,
     newTitle: payload.newTitle,
     newDescription: payload.newDescription,
     status: payload.status,
+    dueDate: payload.dueDate,
+    tags: payload.tags,
   })
   taskFormVisible.value = false
 }

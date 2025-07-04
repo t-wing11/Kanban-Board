@@ -48,6 +48,8 @@
     newTitle: string
     newDescription: string
     status: number
+    dueDate?: string | null
+    tags?: string[]
   }) {
     try {
       const response = await updateTask({
@@ -55,6 +57,8 @@
         title: payload.newTitle,
         description: payload.newDescription,
         status: Number(payload.status),
+        due_date: payload.dueDate ?? null,
+        tags: payload.tags ?? [],
       })
 
       const updatedTask = response.data
@@ -65,6 +69,9 @@
         if (task) {
           task.title = updatedTask.title
           task.description = updatedTask.description
+          task.status = updatedTask.status
+          task.due_date = updatedTask.due_date
+          task.tags = updatedTask.tags
         } 
       } 
     } catch (error) {
@@ -101,6 +108,8 @@
         title: task.title,
         description: task.description,
         status: toColumn,
+        due_date: task.due_date,
+        tags: task.tags,
       })
 
       const sourceColumn = columns.value.find((c) => c.id === fromColumn)
@@ -150,6 +159,8 @@
         title: task.title,
         description: task.description,
         status: toColumn,
+        due_date: task.due_date,
+        tags: task.tags,
       })
 
       task.status = toColumn

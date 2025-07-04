@@ -27,7 +27,7 @@
       </button>
       <CreateTask
         v-if="taskFormVisible"
-        :task="{ id: 0, title: '', description: '', status: column.id }"
+        :task="{ id: 0, title: '', description: '', status: column.id, due_date: null, tags: [] }"
         :isEdit="false"
         :colorClass="column.colorClass"
         @save-task="addTask"
@@ -54,7 +54,7 @@ const props = defineProps<{
 const emit = defineEmits<{
   (
     e: 'edit-task',
-    payload: { taskId: number; newTitle: string; newDescription: string; status: number },
+    payload: { taskId: number; newTitle: string; newDescription: string; status: number, dueDate?: string | null; tags?: string[] },
   ): void
   (e: 'delete-task', taskId: number): void
   (e: 'move-task', payload: { task: TaskType; fromColumn: number; toColumn: number }): void
@@ -71,12 +71,16 @@ function editTask(payload: {
   newTitle: string
   newDescription: string
   status: number
+  dueDate?: string | null
+  tags?: string[]
 }) {
   emit('edit-task', {
     taskId: payload.taskId,
     newTitle: payload.newTitle,
     newDescription: payload.newDescription,
     status: payload.status,
+    dueDate: payload.dueDate,
+    tags: payload.tags,
   })
 }
 
