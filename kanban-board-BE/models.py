@@ -27,6 +27,8 @@ class Task(db.Model):
     title = Column(String, index=True)
     description = Column(String, index=True)
     status = Column(Integer, ForeignKey("columns.id"), nullable=False)
+    due_date = Column(String, index=True)
+    tags = Column(String, nullable=True)
 
     def to_dict(self):
         return {
@@ -34,7 +36,9 @@ class Task(db.Model):
             "title": self.title,
             "description": self.description,
             "status": self.status,
+            "due_date": self.due_date,
+            "tags": self.tags.split(",") if self.tags else []
         }
 
     def __repr__(self):
-        return f"<Task(id={self.id}, title='{self.title}', description='{self.description}', status='{self.status}')>"
+        return f"<Task(id={self.id}, title='{self.title}', description='{self.description}', status='{self.status}', due_date='{self.due_date}', tags={self.tags})>"

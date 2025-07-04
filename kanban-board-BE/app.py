@@ -11,6 +11,7 @@ def create_app():
     db.init_app(app)
     CORS(app)
     with app.app_context():
+        db.drop_all()
         db.create_all()
 
         if KanbanColumn.query.count() == 0:
@@ -36,6 +37,8 @@ def create_app():
                 title=data["title"],
                 description=data["description"],
                 status=data["status"],
+                due_date=data.get("due_date", None),
+                tags=",".join(data.get("tags", [])),
             )
             db.session.add(new_task)
             db.session.commit()
@@ -51,6 +54,8 @@ def create_app():
             task.title = data["title"]
             task.description = data["description"]
             task.status = data["status"]
+            task.due_date = data.get("due_date", None)
+            task.tags = ",".join(data.get("tags", []))
             db.session.commit()
             return jsonify(task.to_dict())
 
