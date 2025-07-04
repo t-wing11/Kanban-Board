@@ -1,6 +1,6 @@
 <template>
     <div class="modal-overlay" @click.self="cancel">
-    <div :class="['modal-content', props.colorClass]">
+    <div :class="['modal-content', `variant--${props.colorClass}`]">
       <div class = "form-container">
         
   <form @submit.prevent="handleSubmit">

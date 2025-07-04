@@ -21,24 +21,19 @@ import api from '../api/api'
 
 const columns = ref<ColumnType[]>([])
 
+const colorMap = {
+  1: 'column-blue',
+  2: 'column-yellow',
+  3: 'column-red',
+}
+
 onMounted(async () => {
   try {
     const response = await api.get('/kanban_board')
     columns.value = response.data
+    // Give each column a color based on its ID
     columns.value.forEach((column) => {
-      let colorClass = ''
-      switch (column.id) {
-        case 1:
-          colorClass = 'column-blue'
-          break
-        case 2:
-          colorClass = 'column-yellow'
-          break
-        case 3:
-          colorClass = 'column-red'
-          break
-      }
-      column.colorClass = colorClass
+      column.colorClass = colorMap[column.id as keyof typeof colorMap]
     })
   } catch (error) {
     console.error('Error fetching tasks:', error)

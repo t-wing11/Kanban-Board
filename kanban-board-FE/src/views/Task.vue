@@ -1,5 +1,5 @@
 <template>
-  <div :class="['task', props.colorClass]">
+  <div :class="['task', `variant--${props.colorClass}`]">
     <div class="task-header">{{ task.title }}</div>
     <div class="task-description">{{ task.description }}</div>
     

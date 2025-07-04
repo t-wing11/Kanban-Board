@@ -1,5 +1,5 @@
 <template>
-  <div :class="['column', column.colorClass]">
+  <div :class="['column', `variant--${column.colorClass}`]">
     <div class="column-header">{{ column.title }}</div>
 
     <div class="column-tasks">
@@ -14,8 +14,7 @@
       />
     </div>
     <div class="column-footer">
-            <button :class="['add-Button', column.colorClass]" v-if="!taskFormVisible" @click="taskFormVisible = true">Add Task <span class="button-icon">➕</span></button>
-
+      <button class="add-Button" v-if="!taskFormVisible" @click="taskFormVisible = true">Add Task <span class="button-icon">➕</span></button>
       <CreateTask
       v-if="taskFormVisible"
       :task="{ id: 0, title: '', description: '', status: column.id }"

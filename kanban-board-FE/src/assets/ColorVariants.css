@@ -1,80 +1,11 @@
-.column-blue {
-  background-color: #000000;
-  border-color: #3910f3;
+.variant--column-blue {
+  --border-color: #3910f3;
 }
 
-.column-blue .column-header {
-  background-color: #3910f3;
-  border-bottom: 5px solid #3910f3;
+.variant--column-red {
+  --border-color: #db2424;
 }
 
-.column-red {
-  background-color: #000000;
-  border-color: #db2424;
-}
-
-.column-red .column-header {
-  background-color: #db2424;
-  border-bottom: 5px solid #db2424;
-}
-
-.column-yellow {
-  background-color: #000000;
-  border-color: #c0bd17;
-}
-
-.column-yellow .column-header {
-  background-color: #c0bd17;
-  border-bottom: 5px solid #c0bd17;
-}
-
-.add-Button.column-blue {
-  border-color: #3910f3;
-}
-
-.add-Button.column-red {
-  border-color: #db2424;
-}
-
-.add-Button.column-yellow {
-  border-color: #c0bd17;
-}
-
-.add-Button.column-blue:hover {
-  background-color: #3910f3;
-}
-
-.add-Button.column-red:hover {
-  background-color: #db2424;
-}
-
-.add-Button.column-yellow:hover {
-  background-color: #c0bd17;
-}
-
-.task.column-blue {
-  border-color: #3910f3;
-  background-color: #1b1919;
-}
-
-.task.column-red {
-  border-color: #db2424;
-  background-color: #1b1919;;
-}
-
-.task.column-yellow {
-  border-color: #c0bd17;
-  background-color: #1b1919;;
-}
-
-.modal-content.column-blue {
-  border-color: #3910f3;
-}
-
-.modal-content.column-red {
-  border-color: #db2424;
-}
-
-.modal-content.column-yellow {
-  border-color: #c0bd17;
+.variant--column-yellow {
+  --border-color: #c0bd17;
 }

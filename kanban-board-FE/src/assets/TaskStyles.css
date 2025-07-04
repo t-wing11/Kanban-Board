@@ -1,41 +1,41 @@
 .task {
-  background-color: #7e7b7b;
-  border: 3px solid #4009be;
   flex: 1;
   display: flex;
   flex-direction: column;
-  color: #ffffff;
-  border-radius: 8px;
   padding: 10px;
+  background-color:  #1b1919;
+  border: 4px solid var(--border-color);
+  border-radius: 8px;
+  color: #ffffff;
 }
 
 .task-header {
+  width: 100%;
+  text-align: left;
+  overflow-wrap: break-word;
   font-weight: bold;
   font-size: 24px;
   color: #ffffff;
   font-family: 'Arial', sans-serif;
-  width: 100%;
-  text-align: left;
-  overflow-wrap: break-word;
 }
 
 .task-description {
+  padding-top: 8px;
+  padding-bottom: 8px;
   font-size: 16px;
   color: #ffffff;
   white-space: normal;
   overflow-wrap: break-word;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
   font-family: 'Arial', sans-serif;
 }
 
 .task select {
+  width: 25%; 
   border: 3px solid #616063;
   border-radius: 4px;
-  font-size: 18px;
   background-color: #000000;
+  font-size: 18px;
   color: #ffffff;
-  width: 25%;
 }
 
 .status-select-container {
@@ -50,16 +50,16 @@
   display: flex;
   justify-content: space-between;
   padding: 10px;
-  padding-top: 1rem;
+  padding-top: 16px;
 }
 
 .task-footer button {
-  background-color: #616063;
-  color: white;
-  border: none;
   padding: 8px 16px;
-  cursor: pointer;
+  background-color: #616063;
   border-radius: 8px;
+  border: none;
+  color: white;
+  cursor: pointer;
 }
 
 .task-footer button:hover {
