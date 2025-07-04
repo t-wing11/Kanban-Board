@@ -104,8 +104,8 @@ def create_app():
                 return jsonify({"message": "Login successful"}), 200
             
             return jsonify({"error": "Invalid credentials"}), 401
-        
-        @app.route("/logout", methods=["POST"])
+
+        @app.route("/kanban_board/logout", methods=["POST"])
         @login_required
         def logout():
             logout_user()

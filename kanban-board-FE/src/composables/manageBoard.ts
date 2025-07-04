@@ -1,6 +1,6 @@
 import { Ref, ref } from 'vue'
 import { ColumnType } from '../types/Column'
-import { getTasks, login } from '../api/api'
+import { getTasks, login, logout } from '../api/api'
 
 export function manageBoard(columns: Ref<ColumnType[]>) {
     const loggedIn = ref(false)
@@ -42,7 +42,13 @@ export function manageBoard(columns: Ref<ColumnType[]>) {
     }
 
     async function handleLogout() {
-    loggedIn.value = false
+        try {
+            await logout()
+            loggedIn.value = false
+            errorMessage.value = ''
+        } catch (error) {
+            console.error('Logout failed:', error)
+        }
     }
 
     return {

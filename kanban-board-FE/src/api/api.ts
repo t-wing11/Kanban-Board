@@ -15,3 +15,5 @@ export const removeTask = (taskId: number) =>
   api.delete(`kanban_board/${taskId}`)
 export const login = (username: string, password: string) =>
   api.post(`kanban_board/login`, { username, password })
+export const logout = () =>
+  api.post(`kanban_board/logout`)
