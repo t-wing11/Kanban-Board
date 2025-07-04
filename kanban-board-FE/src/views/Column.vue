@@ -50,6 +50,7 @@ const props = defineProps<{
   column: ColumnType
 }>()
 
+// Define the emits for the component
 const emit = defineEmits<{
   (
     e: 'edit-task',
@@ -62,6 +63,8 @@ const emit = defineEmits<{
 }>()
 
 const taskFormVisible = ref(false)
+
+// Function Definitions
 
 function editTask(payload: {
   taskId: number
@@ -89,10 +92,9 @@ function moveTask(payload: { task: TaskType; fromColumn: number; toColumn: numbe
 }
 
 function onDrag(event: any) {
-  // Handle when a task is added to this column (dragged from another column)
   if (event.added) {
     const task = event.added.element
-    const fromColumnId = task.status // Original column ID from task status
+    const fromColumnId = task.status
     const toColumnId = props.column.id
 
     emit('drag-task', {

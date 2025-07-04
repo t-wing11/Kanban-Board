@@ -44,6 +44,15 @@ const props = defineProps<{
   colorClass?: string
 }>()
 
+// If task is provided, use its values; otherwise, initialize with default values
+const task = ref<TaskType>({
+  id: props.task?.id || 0,
+  title: props.task?.title || '',
+  description: props.task?.description || '',
+  status: props.task!.status,
+})
+
+// Define the emits for the component
 const emit = defineEmits<{
   (e: 'save-task', task: TaskType): void
   (
@@ -53,12 +62,7 @@ const emit = defineEmits<{
   (e: 'cancel'): void
 }>()
 
-const task = ref<TaskType>({
-  id: props.task?.id || 0,
-  title: props.task?.title || '',
-  description: props.task?.description || '',
-  status: props.task!.status,
-})
+// Function Definitions
 
 function handleSubmit() {
   if (props.isEdit) {

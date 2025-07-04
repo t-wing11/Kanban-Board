@@ -39,6 +39,9 @@ const props = defineProps<{
   colorClass?: string
 }>()
 
+const taskFormVisible = ref(false)
+
+// Define the emits for the component
 const emit = defineEmits<{
   (
     e: 'edit-task',
@@ -47,6 +50,8 @@ const emit = defineEmits<{
   (e: 'delete-task', task: TaskType): void
   (e: 'move-task', payload: { task: TaskType; fromColumn: number; toColumn: number }): void
 }>()
+
+// Function Definitions
 
 const handleEdit = (payload: {
   taskId: number
@@ -70,6 +75,4 @@ const handleDelete = () => {
 const handleMove = (toColumn: number) => {
   emit('move-task', { task: props.task, fromColumn: props.task.status, toColumn })
 }
-
-const taskFormVisible = ref(false)
 </script>
