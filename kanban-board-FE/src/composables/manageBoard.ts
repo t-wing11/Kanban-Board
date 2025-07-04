@@ -37,6 +37,7 @@ export function manageBoard(columns: Ref<ColumnType[]>) {
     } catch (error) {
         console.error('Login failed:', error)
         errorMessage.value = 'Invalid username or password'
+        console.error('Error message:', errorMessage.value)
     }
     }
 

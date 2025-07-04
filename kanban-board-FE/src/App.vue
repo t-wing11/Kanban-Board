@@ -12,4 +12,5 @@ import './assets/BoardStyles.css'
 import './assets/ColorVariants.css'
 import './assets/CreateTaskStyles.css'
 import './assets/TagStyles.css'
+import './assets/LoginStyles.css'
 </script>

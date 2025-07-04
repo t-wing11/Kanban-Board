@@ -1,6 +1,7 @@
 <template>
+  <div class="board-container">
     <Login v-if="!loggedIn" :error-message="errorMessage" @login="handleLogin" /> 
-  <div v-else class="board">
+    <div v-else class="board">
     <Column
       v-for="column in columns"
       :key="column.id"
@@ -12,9 +13,9 @@
       @drag-task="handleDragTask"
       @login="handleLogin"
     />
-    <button @click="handleLogout">Logout</button>
   </div>
-  
+  <button class="logout-button" @click="handleLogout" v-if="loggedIn">Logout</button>
+  </div>
 </template>
 
 <script setup lang="ts">

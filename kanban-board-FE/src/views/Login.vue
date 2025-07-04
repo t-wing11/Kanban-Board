@@ -1,8 +1,11 @@
 <template>
     <div class="login-container">
         <div class="login-header">
-            <h1>Login</h1>
+            Welcome to Travis's Kanban Board!
+            <div class="login-subtitle">
+                Please log in to continue
             </div>
+        </div>
         <div class="login-form">
             <form @submit.prevent="handleLogin">
                 <div class="form-group">
@@ -13,7 +16,7 @@
                     <label for="password">Password</label>
                     <input type="password" id="password" v-model="password" required />
                 </div>
-                <button type="submit">Login</button>
+                <button class="login-button" type="submit">Login</button>
             </form>
             <div v-if="props.errorMessage" class="error-message">
                 {{ props.errorMessage }}
@@ -25,9 +28,6 @@
 
 <script setup lang="ts">
 import { ref, defineEmits } from 'vue'
-import axios from 'axios'
-import { login } from '../api/api'
-import { error } from 'console'
 
 const username = ref('')
 const password = ref('')
