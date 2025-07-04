@@ -1,6 +1,6 @@
 # Python virtual environments
-venv/
-ENV/
-env/
-.venv/
-kanban-board-BE/venv/
+**/venv/
+**/ENV/
+**/env/
+**/.venv/
+**/kanban-board-BE/venv/
