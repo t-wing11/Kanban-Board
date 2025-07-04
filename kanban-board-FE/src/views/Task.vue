@@ -1,7 +1,6 @@
 <template>
   <div :class="['task', `variant--${props.colorClass}`]">
     <div class="task-header">{{ task.title }}</div>
-    <!-- Just paste the tags here -->
     <Tag :tag="task.tags" v-if="task.tags && task.tags.length > 0" />
     <div class="task-description">{{ task.description }}</div>
 
