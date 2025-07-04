@@ -40,12 +40,7 @@
           </div>
           <div class="due-date-input">
             <label for="due-date">Due Date:</label>
-            <input
-              id="due-date"
-              type="date"
-              v-model="task.due_date"
-              class="input"
-            />
+            <input id="due-date" type="date" v-model="task.due_date" class="input" />
           </div>
           <div class="form-footer">
             <button type="submit">Save Task</button>
@@ -60,7 +55,7 @@
 <script setup lang="ts">
 import { defineEmits, defineProps, ref } from 'vue'
 import type { TaskType } from '../types/Task'
-import Multiselect from 'vue-multiselect';
+import Multiselect from 'vue-multiselect'
 import 'vue-multiselect/dist/vue-multiselect.css'
 
 const props = defineProps<{
@@ -86,7 +81,14 @@ const emit = defineEmits<{
   (e: 'save-task', task: TaskType): void
   (
     e: 'edit-task',
-    payload: { taskId: number; newTitle: string; newDescription: string; status: number; dueDate: string | null; tags: string[] },
+    payload: {
+      taskId: number
+      newTitle: string
+      newDescription: string
+      status: number
+      dueDate: string | null
+      tags: string[]
+    },
   ): void
   (e: 'cancel'): void
 }>()

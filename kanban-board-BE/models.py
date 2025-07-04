@@ -37,7 +37,7 @@ class Task(db.Model):
             "description": self.description,
             "status": self.status,
             "due_date": self.due_date,
-            "tags": self.tags.split(",") if self.tags else []
+            "tags": self.tags.split(",") if self.tags else [],
         }
 
     def __repr__(self):

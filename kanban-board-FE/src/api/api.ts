@@ -6,6 +6,9 @@ const api = axios.create({
 })
 
 export const getTasks = () => axios.get(api.defaults.baseURL + 'kanban_board')
-export const createTask = (task: TaskType) => axios.post(api.defaults.baseURL + 'kanban_board', task);
-export const updateTask = (task: TaskType) => axios.put(api.defaults.baseURL + `kanban_board/${task.id}`, task);
-export const removeTask = (taskId: number) => axios.delete(api.defaults.baseURL + `kanban_board/${taskId}`);
+export const createTask = (task: TaskType) =>
+  axios.post(api.defaults.baseURL + 'kanban_board', task)
+export const updateTask = (task: TaskType) =>
+  axios.put(api.defaults.baseURL + `kanban_board/${task.id}`, task)
+export const removeTask = (taskId: number) =>
+  axios.delete(api.defaults.baseURL + `kanban_board/${taskId}`)

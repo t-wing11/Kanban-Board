@@ -12,7 +12,7 @@
         <option value="2">In Progress</option>
         <option value="3">Done</option>
       </select>
-      <label class="due-date" v-if ="task.due_date !== null">Due Date:</label>
+      <label class="due-date" v-if="task.due_date !== null">Due Date:</label>
       <div>{{ task.due_date }}</div>
     </div>
 
@@ -50,7 +50,14 @@ const taskFormVisible = ref(false)
 const emit = defineEmits<{
   (
     e: 'edit-task',
-    payload: { taskId: number; newTitle: string; newDescription: string; status: number; dueDate: string | null; tags: string[] },
+    payload: {
+      taskId: number
+      newTitle: string
+      newDescription: string
+      status: number
+      dueDate: string | null
+      tags: string[]
+    },
   ): void
   (e: 'delete-task', task: TaskType): void
   (e: 'move-task', payload: { task: TaskType; fromColumn: number; toColumn: number }): void

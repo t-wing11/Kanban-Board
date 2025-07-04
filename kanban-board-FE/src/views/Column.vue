@@ -54,7 +54,14 @@ const props = defineProps<{
 const emit = defineEmits<{
   (
     e: 'edit-task',
-    payload: { taskId: number; newTitle: string; newDescription: string; status: number, dueDate?: string | null; tags?: string[] },
+    payload: {
+      taskId: number
+      newTitle: string
+      newDescription: string
+      status: number
+      dueDate?: string | null
+      tags?: string[]
+    },
   ): void
   (e: 'delete-task', taskId: number): void
   (e: 'move-task', payload: { task: TaskType; fromColumn: number; toColumn: number }): void
