@@ -16,6 +16,7 @@ Customized Kanban Board task management app built using my own design/UX.
 
 - Drag n Drop functionality to move tasks between columns or reorder them in there existing column
 - Due dates and tags to introduce more detail to each task
+- Simple authentitication using Flask-Login. Cannot access the board until you login until you login with hard coded user (username: admin, password: admin123)
 
 # Setup
 
@@ -59,3 +60,7 @@ Customized Kanban Board task management app built using my own design/UX.
 **UI Demo**
 
 https://github.com/user-attachments/assets/c5cf0257-2ae9-43f5-b4b7-dabfa3a2e80a
+
+**Login Page**
+
+![image](https://github.com/user-attachments/assets/c1d4c6a4-aca6-43af-b429-06850f7d048f)
