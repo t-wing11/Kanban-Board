@@ -143,7 +143,7 @@ async function addTask(task: TaskType) {
 async function handleDragTask(payload: { task: TaskType; fromColumn: number; toColumn: number }) {
   try {
     const { task, fromColumn, toColumn } = payload
-    
+
     if (fromColumn === toColumn) {
       return
     }
@@ -159,6 +159,6 @@ async function handleDragTask(payload: { task: TaskType; fromColumn: number; toC
     console.log('Dragged task:', task.id, 'from column', fromColumn, 'to column', toColumn)
   } catch (error) {
     console.error('Error updating task via drag:', error)
-    }
+  }
 }
 </script>

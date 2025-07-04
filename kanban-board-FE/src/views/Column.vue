@@ -9,17 +9,17 @@
       group="tasks"
       :data-column-id="column.id"
       @change="onDrag"
-      >
+    >
       <template #item="{ element: task }">
-      <Task
-        :key="task.id"
-        :task="task"
-        :colorClass="column.colorClass"
-        @edit-task="editTask"
-        @delete-task="deleteTask"
-        @move-task="moveTask"
-      />
-    </template>
+        <Task
+          :key="task.id"
+          :task="task"
+          :colorClass="column.colorClass"
+          @edit-task="editTask"
+          @delete-task="deleteTask"
+          @move-task="moveTask"
+        />
+      </template>
     </draggable>
     <div class="column-footer">
       <button class="add-Button" v-if="!taskFormVisible" @click="taskFormVisible = true">
