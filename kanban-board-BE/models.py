@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
 from database import db
+from flask_login import UserMixin
 
 
 class KanbanColumn(db.Model):
@@ -42,3 +43,13 @@ class Task(db.Model):
 
     def __repr__(self):
         return f"<Task(id={self.id}, title='{self.title}', description='{self.description}', status='{self.status}', due_date='{self.due_date}', tags={self.tags})>"
+    
+class User(UserMixin, db.Model):
+    __tablename__ = "users"
+
+    id = Column(Integer, primary_key=True)
+    username = Column(String, unique=True, nullable=False)
+    password = Column(String, nullable=False)
+
+    def __repr__(self):
+        return f"<User(id={self.id}, username='{self.username}', password='{self.password}')>"

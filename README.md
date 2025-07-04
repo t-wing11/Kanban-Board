@@ -59,7 +59,3 @@ Customized Kanban Board task management app built using my own design/UX.
 **UI Demo**
 
 https://github.com/user-attachments/assets/c5cf0257-2ae9-43f5-b4b7-dabfa3a2e80a
-
-
-
-
