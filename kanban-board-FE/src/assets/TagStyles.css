@@ -1,0 +1,32 @@
+.tag-container {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.tag-item {
+    padding : 2px 6px;
+    border-radius: 4px;
+    font-family: 'Arial', sans-serif;
+    font-size: 13px;
+}
+
+.tag-urgent {
+  background-color: #ff4444;
+}
+
+.tag-important {
+  background-color: #ff8800;
+}
+
+.tag-optional {
+  background-color: #4488ff;
+}
+
+.tag-backlog {
+  background-color: #44aa44;
+}
+
+

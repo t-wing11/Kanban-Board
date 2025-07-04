@@ -16,6 +16,20 @@
               required
             ></textarea>
           </div>
+          <div class="form-group">
+            <label for="tags">Tags:</label>
+            <multiselect
+              v-model="task.tags"
+              :options="options"
+              :multiple="true"
+              :close-on-select="false"
+              :placeholder="'Select tags...'"
+              :show-labels="false"
+              :preselect-first="false"
+              :allow-empty="true"
+            >
+            </multiselect>
+          </div>
           <div class="status-select-container" v-if="!props.isEdit">
             <label>Status:</label>
             <select v-model="task.status">
@@ -24,22 +38,14 @@
               <option value="3">Done</option>
             </select>
           </div>
-          <div class="dueDate">
-            <label for="due_date">Due Date:</label>
+          <div class="due-date-input">
+            <label for="due-date">Due Date:</label>
             <input
-              id="due_date"
+              id="due-date"
               type="date"
               v-model="task.due_date"
               class="input"
             />
-          </div>
-          <div class="tag-select-container">
-            <label for="tags">Tags:</label>
-            <select id="tags" v-model="task.tags" multiple>
-              <option value="urgent">Urgent</option>
-              <option value="important">Important</option>
-              <option value="optional">Optional</option>
-            </select>
           </div>
           <div class="form-footer">
             <button type="submit">Save Task</button>
@@ -54,6 +60,8 @@
 <script setup lang="ts">
 import { defineEmits, defineProps, ref } from 'vue'
 import type { TaskType } from '../types/Task'
+import Multiselect from 'vue-multiselect';
+import 'vue-multiselect/dist/vue-multiselect.css'
 
 const props = defineProps<{
   task?: TaskType | null
@@ -70,6 +78,8 @@ const task = ref<TaskType>({
   due_date: props.task?.due_date || null,
   tags: props.task?.tags || [],
 })
+
+const options = ['urgent', 'important', 'optional', 'backlog']
 
 // Define the emits for the component
 const emit = defineEmits<{

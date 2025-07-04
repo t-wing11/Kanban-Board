@@ -22,6 +22,7 @@
 .task-description {
   padding-top: 8px;
   padding-bottom: 8px;
+  margin-bottom: 8px;
   font-size: 16px;
   color: #ffffff;
   white-space: normal;
@@ -30,7 +31,7 @@
 }
 
 .task select {
-  width: 25%;
+  width: 30%;
   border: 3px solid #616063;
   border-radius: 4px;
   background-color: #000000;
@@ -38,12 +39,13 @@
   color: #ffffff;
 }
 
-.status-select-container {
+.task-body-container {
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 10px;
   font-size: 18px;
+  font-family: 'Arial', sans-serif;
 }
 
 .task-footer {
@@ -64,4 +66,8 @@
 
 .task-footer button:hover {
   background-color: #494949;
+}
+
+.due-date {
+  padding-left: 35px;
 }

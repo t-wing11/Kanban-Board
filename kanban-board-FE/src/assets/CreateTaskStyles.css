@@ -91,3 +91,13 @@
 .form-footer button:hover {
   background-color: #494949;
 }
+
+.due-date-input {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  margin-top: 12px;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+

@@ -11,4 +11,5 @@ import './assets/ColumnStyles.css'
 import './assets/BoardStyles.css'
 import './assets/ColorVariants.css'
 import './assets/CreateTaskStyles.css'
+import './assets/TagStyles.css'
 </script>

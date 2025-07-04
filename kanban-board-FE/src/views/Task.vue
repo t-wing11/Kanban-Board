@@ -1,17 +1,19 @@
 <template>
   <div :class="['task', `variant--${props.colorClass}`]">
     <div class="task-header">{{ task.title }}</div>
-    <div class="task-tags">{{ task.tags }}</div>
+    <!-- Just paste the tags here -->
+    <Tag :tag="task.tags" v-if="task.tags && task.tags.length > 0" />
     <div class="task-description">{{ task.description }}</div>
 
-    <div class="status-select-container">
+    <div class="task-body-container">
       <label for="status-select">Status:</label>
       <select v-model="task.status" @change="handleMove(task.status)">
         <option value="1">To Do</option>
         <option value="2">In Progress</option>
         <option value="3">Done</option>
       </select>
-      <div class="dueDate">Due Date: {{ task.due_date }}</div>
+      <label class="due-date" v-if ="task.due_date !== null">Due Date:</label>
+      <div>{{ task.due_date }}</div>
     </div>
 
     <div class="task-footer">
@@ -35,6 +37,7 @@
 import { defineProps, ref, defineEmits } from 'vue'
 import type { TaskType } from '../types/Task'
 import CreateTask from './CreateTask.vue'
+import Tag from './Tag.vue'
 
 const props = defineProps<{
   task: TaskType
