@@ -35,8 +35,8 @@ Customized Kanban Board task management app built using my own design/UX.
 
 # Running the project
 
-- Make sure you are in the root terminal of the project (\kanban-board)v
-- Run '.\script.ps1' in the terminal
+- Make sure you are in the root terminal of the project (\kanban-board)
+- Run '.\start.ps1' in the terminal
 - This will startup the application
 
 # Pictures
