@@ -17,7 +17,7 @@
             ></textarea>
           </div>
           <div class="form-group">
-            <label for="tags">Tags:</label>
+            <label>Tags:</label>
             <multiselect
               v-model="task.tags"
               :options="options"
@@ -31,8 +31,8 @@
             </multiselect>
           </div>
           <div class="status-select-container" v-if="!props.isEdit">
-            <label>Status:</label>
-            <select v-model="task.status">
+            <label for="status">Status:</label>
+            <select id="status" v-model="task.status">
               <option value="1">To Do</option>
               <option value="2">In Progress</option>
               <option value="3">Done</option>

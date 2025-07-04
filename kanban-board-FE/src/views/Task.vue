@@ -6,14 +6,18 @@
     <div class="task-description">{{ task.description }}</div>
 
     <div class="task-body-container">
+      <div class="task-body-item">
       <label for="status-select">Status:</label>
       <select v-model="task.status" @change="handleMove(task.status)">
         <option value="1">To Do</option>
         <option value="2">In Progress</option>
         <option value="3">Done</option>
       </select>
-      <label class="due-date" v-if="task.due_date !== null">Due Date:</label>
-      <div>{{ task.due_date }}</div>
+      </div>
+      <div class="task-body-item">
+        <label class="due-date" v-if="task.due_date !== null">Due Date:</label>
+        <div>{{ task.due_date }}</div>
+      </div>
     </div>
 
     <div class="task-footer">

@@ -62,12 +62,14 @@
 .status-select-container {
   display: flex;
   flex-direction: row;
+  align-items: center;
   margin-top: 12px;
   gap: 10px;
+  font-size: 22px;
 }
 
 .status-select-container select {
-  width: 30%;
+  padding: 8px;
   background-color: #000000;
   border: 3px solid #616063;
   border-radius: 4px;
@@ -95,8 +97,17 @@
 .due-date-input {
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
+  align-items: center;
   margin-top: 12px;
   gap: 10px;
   margin-bottom: 10px;
+  font-size: 22px;
+}
+
+.due-date-input input {
+  width: 35%;
+  padding: 8px;
+  border: 3px solid #616063;
+  border-radius: 4px;
+  font-size: 18px;
 }
