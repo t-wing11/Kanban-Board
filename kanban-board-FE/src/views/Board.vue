@@ -8,6 +8,7 @@
       @delete-task="deleteTask"
       @move-task="moveTask"
       @add-task="addTask"
+      @drag-task="handleDragTask"
     />
   </div>
 </template>
@@ -137,5 +138,27 @@ async function addTask(task: TaskType) {
   } catch (error) {
     console.error('Error adding task:', error)
   }
+}
+
+async function handleDragTask(payload: { task: TaskType; fromColumn: number; toColumn: number }) {
+  try {
+    const { task, fromColumn, toColumn } = payload
+    
+    if (fromColumn === toColumn) {
+      return
+    }
+
+    await api.put(`/kanban_board/${task.id}`, {
+      title: task.title,
+      description: task.description,
+      status: toColumn,
+    })
+
+    task.status = toColumn
+
+    console.log('Dragged task:', task.id, 'from column', fromColumn, 'to column', toColumn)
+  } catch (error) {
+    console.error('Error updating task via drag:', error)
+    }
 }
 </script>

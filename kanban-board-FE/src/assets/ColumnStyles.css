@@ -27,6 +27,29 @@
   flex-direction: column;
   width: 85%;
   gap: 8px;
+  padding: 8px;
+  border-radius: 4px;
+}
+
+.column-tasks.sortable-drag-over {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 2px dashed var(--border-color);
+}
+
+.column-tasks .sortable-ghost {
+  opacity: 0.4;
+  background-color: #3a3535;
+  border: 2px dashed var(--border-color);
+}
+
+.column-tasks .sortable-chosen {
+  cursor: grabbing !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+}
+
+.column-tasks .sortable-drag {
+  opacity: 0.8;
 }
 
 .column-footer {
