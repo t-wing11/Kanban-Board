@@ -14,17 +14,19 @@
       />
     </div>
     <div class="column-footer">
-      <button class="add-Button" v-if="!taskFormVisible" @click="taskFormVisible = true">Add Task <span class="button-icon">➕</span></button>
+      <button class="add-Button" v-if="!taskFormVisible" @click="taskFormVisible = true">
+        Add Task <span class="button-icon">➕</span>
+      </button>
       <CreateTask
-      v-if="taskFormVisible"
-      :task="{ id: 0, title: '', description: '', status: column.id }"
-      :isEdit="false"
-      :colorClass="column.colorClass"
-      @save-task="addTask"
-      @edit-task="editTask"
-      @cancel="taskFormVisible = false"
-    />
-  </div>
+        v-if="taskFormVisible"
+        :task="{ id: 0, title: '', description: '', status: column.id }"
+        :isEdit="false"
+        :colorClass="column.colorClass"
+        @save-task="addTask"
+        @edit-task="editTask"
+        @cancel="taskFormVisible = false"
+      />
+    </div>
   </div>
 </template>
 

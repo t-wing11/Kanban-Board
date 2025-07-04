@@ -41,7 +41,7 @@
   border: 3px solid #616063;
   border-radius: 4px;
   font-size: 14px;
-  color: #000000; 
+  color: #000000;
 }
 
 .form-group textarea {
@@ -56,7 +56,7 @@
 
 .form-group label {
   font-size: 22px;
-  color: #ffffff; 
+  color: #ffffff;
 }
 
 .status-select-container {
@@ -72,7 +72,7 @@
   border: 3px solid #616063;
   border-radius: 4px;
   font-size: 18px;
-  color: #ffffff; 
+  color: #ffffff;
 }
 
 .form-footer {

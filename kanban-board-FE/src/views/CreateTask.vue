@@ -1,38 +1,37 @@
 <template>
-    <div class="modal-overlay" @click.self="cancel">
+  <div class="modal-overlay" @click.self="cancel">
     <div :class="['modal-content', `variant--${props.colorClass}`]">
-      <div class = "form-container">
-        
-  <form @submit.prevent="handleSubmit">
-    <div class="form-group">
-      <label for="title">Title</label>
-      <input type="text" id="title" v-model="task.title" class="form-control" required />
-    </div>
-    <div class="form-group">
-      <label for="description">Description</label>
-      <textarea
-        id="description"
-        v-model="task.description"
-        class="form-control"
-        required
-      ></textarea>
-    </div>
-    <div class="status-select-container" v-if="!props.isEdit">
-      <label>Status:</label>
-      <select v-model="task.status">
-        <option value="1">To Do</option>
-        <option value="2">In Progress</option>
-        <option value="3">Done</option>
-      </select>
-    </div>
-    <div class="form-footer">      
-    <button type="submit">Save Task</button>
-    <button type="button" @click="cancel">Cancel</button>
-    </div>
-  </form>
+      <div class="form-container">
+        <form @submit.prevent="handleSubmit">
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" id="title" v-model="task.title" class="form-control" required />
+          </div>
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea
+              id="description"
+              v-model="task.description"
+              class="form-control"
+              required
+            ></textarea>
+          </div>
+          <div class="status-select-container" v-if="!props.isEdit">
+            <label>Status:</label>
+            <select v-model="task.status">
+              <option value="1">To Do</option>
+              <option value="2">In Progress</option>
+              <option value="3">Done</option>
+            </select>
+          </div>
+          <div class="form-footer">
+            <button type="submit">Save Task</button>
+            <button type="button" @click="cancel">Cancel</button>
+          </div>
+        </form>
       </div>
-</div>
-</div>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">

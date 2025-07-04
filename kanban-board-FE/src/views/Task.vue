@@ -2,14 +2,14 @@
   <div :class="['task', `variant--${props.colorClass}`]">
     <div class="task-header">{{ task.title }}</div>
     <div class="task-description">{{ task.description }}</div>
-    
+
     <div class="status-select-container">
       <label for="status-select">Status:</label>
-    <select v-model="task.status" @change="handleMove(task.status)">
-      <option value="1">To Do</option>
-      <option value="2">In Progress</option>
-      <option value="3">Done</option>
-    </select>
+      <select v-model="task.status" @change="handleMove(task.status)">
+        <option value="1">To Do</option>
+        <option value="2">In Progress</option>
+        <option value="3">Done</option>
+      </select>
     </div>
 
     <div class="task-footer">
@@ -25,7 +25,6 @@
         @edit-task="handleEdit"
         @cancel="taskFormVisible = false"
       />
-      
     </div>
   </div>
 </template>
@@ -36,7 +35,7 @@ import type { TaskType } from '../types/Task'
 import CreateTask from './CreateTask.vue'
 
 const props = defineProps<{
-  task: TaskType,
+  task: TaskType
   colorClass?: string
 }>()
 
