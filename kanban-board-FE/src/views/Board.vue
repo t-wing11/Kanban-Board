@@ -1,5 +1,6 @@
 <template>
-  <div class="board">
+    <Login v-if="!loggedIn" :error-message="errorMessage" @login="handleLogin" /> 
+  <div v-else class="board">
     <Column
       v-for="column in columns"
       :key="column.id"
@@ -9,8 +10,11 @@
       @move-task="moveTask"
       @add-task="addTask"
       @drag-task="handleDragTask"
+      @login="handleLogin"
     />
+    <button @click="handleLogout">Logout</button>
   </div>
+  
 </template>
 
 <script setup lang="ts">
@@ -18,7 +22,8 @@ import { ref, onMounted } from 'vue'
 import { ColumnType } from '../types/Column'
 import type { TaskType } from '../types/Task'
 import Column from './Column.vue'
-import { getTasks, createTask, updateTask, removeTask } from '../api/api'
+import Login from './Login.vue'
+import { getTasks, createTask, updateTask, removeTask, login } from '../api/api'
 
 const columns = ref<ColumnType[]>([])
 
@@ -28,19 +33,48 @@ const colorMap = {
   3: 'column-red',
 }
 
-// Load the board
-onMounted(async () => {
+const loggedIn = ref(false)
+const errorMessage = ref('')
+
+// Load Board Function
+async function loadBoard() {
   try {
     const response = await getTasks()
     columns.value = response.data
-    // Give each column a color based on its ID
+    // Assign color classes to each column
     columns.value.forEach((column) => {
       column.colorClass = colorMap[column.id as keyof typeof colorMap]
     })
   } catch (error) {
     console.error('Error fetching tasks:', error)
   }
+}
+
+// Login Function
+async function handleLogin(payload: { username: string; password: string }) {
+  try {
+    await login(payload.username, payload.password)
+    loggedIn.value = true
+    errorMessage.value = ''
+    // Load the board after successful login
+    await loadBoard()
+  } catch (error) {
+    console.error('Login failed:', error)
+    errorMessage.value = 'Invalid username or password'
+  }
+}
+
+async function handleLogout() {
+  loggedIn.value = false
+}
+
+// Load the board
+onMounted(() => {
+  if (loggedIn.value) {
+    loadBoard()
+  }
 })
+
 
 // Edit task backend call
 async function editTask(payload: {

@@ -10,7 +10,7 @@ def create_app():
     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///kanban_board.db"
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     db.init_app(app)
-    CORS(app)
+    CORS(app, supports_credentials=True)
 
     login_manager = LoginManager()
     login_manager.init_app(app)
@@ -91,8 +91,8 @@ def create_app():
         @login_manager.user_loader
         def load_user(user_id):
             return User.query.get(int(user_id))
-        
-        @app.route("/login", methods=["POST", "GET"])
+
+        @app.route("/kanban_board/login", methods=["POST"])
         def login():
             data = request.json
             Username = data.get("username")
